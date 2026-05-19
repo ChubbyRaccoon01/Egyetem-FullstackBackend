@@ -18,7 +18,8 @@ namespace KovacsWebshop.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var products = _dbContext.Products.ToList();
+            return View(products);
         }
 
         public IActionResult Privacy()
