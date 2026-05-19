@@ -1,6 +1,9 @@
 using KovacsWebshop.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using KovacsWebshop.DAL;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace KovacsWebshop
 {

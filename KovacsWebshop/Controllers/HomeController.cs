@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using KovacsWebshop.DAL;
 using KovacsWebshop.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,12 @@ namespace KovacsWebshop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ProductDbContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ProductDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
