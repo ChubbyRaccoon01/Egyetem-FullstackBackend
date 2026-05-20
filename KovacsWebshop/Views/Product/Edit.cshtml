@@ -1,0 +1,44 @@
+﻿@model KovacsWebshop.Models.Product
+
+<h2>Termek szerkesztese</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Nev</label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Leiras</label>
+        <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Ar (Ft)</label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" required />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Type" class="form-label">Tipus</label>
+        <select asp-for="Type" class="form-select">
+            <option value="">Valassz...</option>
+            <option>Kard</option>
+            <option>Kes</option>
+            <option>Fejsze</option>
+            <option>Buzogany</option>
+        </select>
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Mentes</button>
+    <a href="/Product/Index" class="btn btn-secondary">Megse</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

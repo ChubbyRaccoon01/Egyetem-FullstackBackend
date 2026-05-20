@@ -1,11 +1,11 @@
-﻿using KovacsWebshop.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using KovacsWebshop.Models;
 
 namespace KovacsWebshop.DAL
 {
-    public class ProductDbContext : IdentityDbContext<IdentityUser>  // ← EZT MÓDOSÍTSD!
+    public class ProductDbContext : IdentityDbContext<IdentityUser>
     {
         public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
         {
@@ -16,7 +16,7 @@ namespace KovacsWebshop.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); 
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.Price)

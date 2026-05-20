@@ -16,7 +16,7 @@ namespace KovacsWebshop.Controllers
             _dbContext = dbContext;
         }
 
-        public IActionResult Index(string? category)
+        public IActionResult Index(string? category, string? search)
         {
             var products = _dbContext.Products.AsQueryable();
 
@@ -25,7 +25,13 @@ namespace KovacsWebshop.Controllers
                 products = products.Where(p => p.Type == category);
             }
 
+            if (!string.IsNullOrEmpty(search))
+            {
+                products = products.Where(p => p.Name.Contains(search));
+            }
+
             ViewBag.SelectedCategory = category;
+            ViewBag.SearchTerm = search;
             return View(products.ToList());
         }
 
@@ -39,6 +45,7 @@ namespace KovacsWebshop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
 
     }
 }

@@ -76,6 +76,34 @@ namespace KovacsWebshop.Models
                 context.Roles.Add(adminRole);
                 context.SaveChanges();
             }
+            if (!context.Users.Any(u => u.Email == "admin@forgelegacy.com"))
+            {
+                var adminUser = new IdentityUser
+                {
+                    UserName = "admin@forgelegacy.com",
+                    Email = "admin@forgelegacy.com",
+                    EmailConfirmed = true
+                };
+
+                var hasher = new PasswordHasher<IdentityUser>();
+                adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin123$");
+
+                context.Users.Add(adminUser);
+                context.SaveChanges();
+
+                var admin = context.Users.FirstOrDefault(u => u.Email == "admin@forgelegacy.com");
+                var role = context.Roles.FirstOrDefault(r => r.Name == "Admin");
+
+                if (admin != null && role != null)
+                {
+                    context.UserRoles.Add(new IdentityUserRole<string>
+                    {
+                        UserId = admin.Id,
+                        RoleId = role.Id
+                    });
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }

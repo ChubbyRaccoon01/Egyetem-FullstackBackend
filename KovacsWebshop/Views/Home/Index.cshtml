@@ -1,4 +1,12 @@
-﻿@model IEnumerable<KovacsWebshop.Models.Product>
+﻿<form method="get" class="mb-3">
+    <input type="text" name="search" value="@ViewBag.SearchTerm" placeholder="Keresés..." />
+    <button type="submit">Keresés</button>
+    @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+    {
+        <a href="/Home/Index">Törlés</a>
+    }
+</form>
+
 @foreach (var p in Model)
 {
     <partial name="ProductTemplate" model="p" />
