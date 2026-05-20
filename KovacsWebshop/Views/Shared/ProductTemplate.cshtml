@@ -12,5 +12,6 @@
         </h5>
         <h6 class="card-subtitle mb-2 text-muted">@Model.Type</h6>
         <p class="card-text">@Model.Description</p>
+        <a class="btn btn-outline-secondary mt-2" href="@Url.Action("Create", "Purchase", new { productId = Model.ProductId })">Order</a>
     </div>
 </div>
