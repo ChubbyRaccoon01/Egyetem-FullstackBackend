@@ -1,0 +1,44 @@
+﻿@model IEnumerable<KovacsWebshop.Models.Purchase>
+
+<h2>Rendelesek kezelese</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Termek</th>
+            <th>Mennyiseg</th>
+            <th>Email</th>
+            <th>Datum</th>
+            <th>Statusz</th>
+            <th>Muvelet</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.PurchaseId</td>
+                <td>@order.ProductName</td>
+                <td>@order.Quantity</td>
+                <td>@order.Email</td>
+                <td>@order.PurchaseDate.ToShortDateString()</td>
+                <td>@order.Status</td>
+                <td>
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="id" value="@order.PurchaseId" />
+                        <select name="status" class="form-select-sm">
+                            <option value="Pending" selected="@(order.Status == OrderStatus.Pending)">Pending</option>
+                            <option value="InProgress" selected="@(order.Status == OrderStatus.InProgress)">InProgress</option>
+                            <option value="PurchaseBooked" selected="@(order.Status == OrderStatus.PurchaseBooked)">PurchaseBooked</option>
+                            <option value="Delivered" selected="@(order.Status == OrderStatus.Delivered)">Delivered</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary">Modosit</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Home/Index" class="btn btn-secondary">Vissza a fooldalra</a>

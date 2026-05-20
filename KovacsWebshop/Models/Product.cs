@@ -17,7 +17,6 @@ namespace KovacsWebshop.Models
         public string Description { get; set; } = null!;
 
         [Required]
-        [Range(0.01, 10000000)]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 

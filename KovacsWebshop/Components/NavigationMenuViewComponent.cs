@@ -15,7 +15,6 @@ namespace KovacsWebshop.Components
 
         public IViewComponentResult Invoke()
         {
-            // (Kard, Kés, Fejsze)
             var categories = _dbContext.Products
                 .Select(p => p.Type)
                 .Where(t => t != null)

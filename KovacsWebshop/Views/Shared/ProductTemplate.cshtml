@@ -4,11 +4,9 @@
     <div class="card-body">
         <h5 class="card-name">
             @Model.Name
-            <button type="button" class="btn btn-primary">
-                <span class="badge badge-pill badge-primary">
-                    <small>@Model.Price.ToString("c")</small>
-                </span>
-            </button>
+            <span class="badge rounded-pill bg-primary ms-2">
+                @Model.Price.ToString("c")
+            </span>
         </h5>
         <h6 class="card-subtitle mb-2 text-muted">@Model.Type</h6>
         <p class="card-text">@Model.Description</p>
