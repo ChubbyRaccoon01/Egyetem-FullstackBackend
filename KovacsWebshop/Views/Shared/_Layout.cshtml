@@ -16,12 +16,14 @@
         </div>
         <div class="row m-1 p-1">
             <div id="categories" class="col-3">
-                The ForgeLegacy Shop homepage helps you explore…
+                <h5>Termék típusok</h5>
+                @await Component.InvokeAsync("NavigationMenu")
             </div>
             <div class="col-9">
                 @RenderBody()
             </div>
         </div>
     </div>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

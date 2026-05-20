@@ -1,7 +1,10 @@
 using KovacsWebshop.DAL;
 using KovacsWebshop.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace KovacsWebshop.Controllers
 {
@@ -17,7 +20,10 @@ namespace KovacsWebshop.Controllers
 
         public IActionResult Index()
         {
+            var userEmail = User.Identity?.Name;
+
             var purchases = _dbContext.Purchases
+                .Where(p => p.Email == userEmail)
                 .OrderByDescending(p => p.PurchaseDate)
                 .ToList();
             return View(purchases);
@@ -26,11 +32,14 @@ namespace KovacsWebshop.Controllers
         [HttpGet]
         public IActionResult Create(int? productId)
         {
+            var userEmail = User.Identity?.Name;
+
             var purchase = new Purchase
             {
                 PurchaseDate = DateTime.Now,
                 Status = OrderStatus.Pending,
-                Quantity = 1
+                Quantity = 1,
+                Email = userEmail ?? string.Empty
             };
 
             if (productId.HasValue)
@@ -50,6 +59,9 @@ namespace KovacsWebshop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Purchase purchase)
         {
+            var userEmail = User.Identity?.Name;
+            purchase.Email = userEmail ?? string.Empty;
+
             if (!ModelState.IsValid)
             {
                 return View(purchase);

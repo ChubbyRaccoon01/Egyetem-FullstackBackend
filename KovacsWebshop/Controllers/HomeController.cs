@@ -16,10 +16,17 @@ namespace KovacsWebshop.Controllers
             _dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? category)
         {
-            var products = _dbContext.Products.ToList();
-            return View(products);
+            var products = _dbContext.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                products = products.Where(p => p.Type == category);
+            }
+
+            ViewBag.SelectedCategory = category;
+            return View(products.ToList());
         }
 
         public IActionResult Privacy()
@@ -32,5 +39,6 @@ namespace KovacsWebshop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

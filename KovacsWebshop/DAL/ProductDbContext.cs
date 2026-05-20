@@ -1,9 +1,11 @@
 ﻿using KovacsWebshop.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace KovacsWebshop.DAL
 {
-    public class ProductDbContext:DbContext
+    public class ProductDbContext : IdentityDbContext<IdentityUser>  // ← EZT MÓDOSÍTSD!
     {
         public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
         {
